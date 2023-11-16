@@ -9,33 +9,54 @@ const icon = (name) => (
 const navConfig = [
   {
     title: 'dashboard',
-    path: '/',
+    path: '/:user/',
     icon: icon('ic_analytics'),
   },
   {
-    title: 'user',
-    path: '/user',
-    icon: icon('ic_user'),
-  },
-  {
-    title: 'product',
-    path: '/products',
+    title: 'badges',
+    path: '/:user/badges',
     icon: icon('ic_cart'),
   },
   {
-    title: 'blog',
-    path: '/blog',
+    title: 'desafios',
+    path: '/:user/challenges',
+    icon: icon('ic_cart'),
+  },
+  {
+    title: 'hard-skills',
+    path: '/:user/hard-skills',
     icon: icon('ic_blog'),
   },
   {
-    title: 'login',
-    path: '/login',
-    icon: icon('ic_lock'),
+    title: 'soft-skills',
+    path: '/:user/soft-skills',
+    icon: icon('ic_blog'),
   },
   {
-    title: 'Not found',
-    path: '/404',
-    icon: icon('ic_disabled'),
+    title: 'ranking',
+    path: '/:user/ranking',
+    icon: icon('ic_cart'),
+  },
+  {
+    title: 'histórico de pontuação',
+    path: '/:user/points-history',
+    icon: icon('ic_analytics'),
+  },
+  {
+    title: 'produtos',
+    path: '/:user/products',
+    icon: icon('ic_blog'),
+  },
+  {
+    title: 'informações',
+    path: '/:user/infos',
+    icon: icon('ic_cart'),
+  },
+  {
+    title: 'usuários',
+    path: '/:user/users',
+    icon: icon('ic_user'),
+    needsAdmin: true,
   },
 ];
 
