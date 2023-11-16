@@ -80,6 +80,10 @@ export default function UserTableRow({
         }}
       >
         <MenuItem onClick={handleCloseMenu}>
+          <Iconify icon="mdi:star-four-points-circle" sx={{ mr: 2 }} />
+          Add desafio
+        </MenuItem>
+        <MenuItem onClick={handleCloseMenu}>
           <Iconify icon="carbon:view-filled" sx={{ mr: 2 }} />
           Visualizar
         </MenuItem>

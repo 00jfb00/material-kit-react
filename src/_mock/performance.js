@@ -43,12 +43,6 @@ export const performance = {
     return badge;
   }),
   challenges: [
-    ...dailyChallenges.map((challenge) => {
-      const progress = faker.number.int({ min: 0, max: 100 });
-      challenge.progress = progress;
-      challenge.done = progress === 100;
-      return challenge;
-    }),
     {
       id: faker.string.uuid(),
       title: 'Bora perder a timidez!',
@@ -59,5 +53,11 @@ export const performance = {
       points: 30,
       icon: '/assets/images/badges/badge_3.svg',
     },
+    ...dailyChallenges.map((challenge) => {
+      const progress = faker.number.int({ min: 0, max: 100 });
+      challenge.progress = progress;
+      challenge.done = progress === 100;
+      return challenge;
+    }),
   ],
 };

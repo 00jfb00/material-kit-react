@@ -1,5 +1,3 @@
-import { faker } from '@faker-js/faker';
-
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
@@ -64,12 +62,13 @@ export default function AppView() {
         <Grid xs={12} md={6} lg={8}>
           <AppNewsUpdate
             title="Últimos desafios"
-            list={[...Array(5)].map((_, index) => ({
-              id: faker.string.uuid(),
-              title: faker.person.jobTitle(),
-              description: faker.commerce.productDescription(),
+            list={performance.challenges.slice(0, 5).map((item, index) => ({
+              id: item.id,
+              title: item.title,
+              description: item.description,
               image: `/assets/images/covers/cover_${index + 1}.jpg`,
-              postedAt: faker.date.recent(),
+              points: item.points,
+              type: item.type,
             }))}
           />
         </Grid>

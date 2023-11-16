@@ -9,17 +9,16 @@ import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import CardHeader from '@mui/material/CardHeader';
 
-import { fToNow } from 'src/utils/format-time';
-
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
 import { useRouter } from 'src/routes/hooks';
+import { Chip } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
 export default function AppNewsUpdate({ title, subheader, list, ...other }) {
   const router = useRouter();
-  
+
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
@@ -59,7 +58,7 @@ AppNewsUpdate.propTypes = {
 // ----------------------------------------------------------------------
 
 function NewsItem({ news }) {
-  const { image, title, description, postedAt } = news;
+  const { image, title, description, points, type } = news;
 
   return (
     <Stack direction="row" alignItems="center" spacing={2}>
@@ -71,17 +70,17 @@ function NewsItem({ news }) {
       />
 
       <Box sx={{ minWidth: 240, flexGrow: 1 }}>
-        <Link color="inherit" variant="subtitle2" underline="hover" noWrap>
-          {title}
+        <Link color="inherit" variant="subtitle2" underline="hover">
+          <Chip icon={<Iconify icon="mdi:category-plus" />} label={type} /> {title}
         </Link>
 
-        <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
+        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
           {description}
         </Typography>
       </Box>
 
       <Typography variant="caption" sx={{ pr: 3, flexShrink: 0, color: 'text.secondary' }}>
-        {fToNow(postedAt)}
+        Vale {points} pontos
       </Typography>
     </Stack>
   );
@@ -91,7 +90,8 @@ NewsItem.propTypes = {
   news: PropTypes.shape({
     image: PropTypes.string,
     title: PropTypes.string,
+    type: PropTypes.string,
     description: PropTypes.string,
-    postedAt: PropTypes.instanceOf(Date),
+    points: PropTypes.number,
   }),
 };

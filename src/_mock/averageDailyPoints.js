@@ -1,3 +1,5 @@
+import { faker } from '@faker-js/faker';
+
 export const averageDailyPoints = {
   labels: [
     '11/09/2023',
@@ -13,13 +15,29 @@ export const averageDailyPoints = {
       name: 'Você',
       type: 'column',
       fill: 'solid',
-      data: [23, 11, 22, 27, 13, 22, 37],
+      data: [
+        faker.number.int({ min: 10, max: 70 }),
+        faker.number.int({ min: 10, max: 70 }),
+        faker.number.int({ min: 10, max: 70 }),
+        faker.number.int({ min: 10, max: 70 }),
+        faker.number.int({ min: 10, max: 70 }),
+        faker.number.int({ min: 10, max: 70 }),
+        faker.number.int({ min: 10, max: 70 }),
+      ],
     },
     {
       name: 'Média Geral',
       type: 'area',
       fill: 'gradient',
-      data: [44, 55, 41, 67, 22, 43, 21],
-    }
+      data: [
+        faker.number.int({ min: 10, max: 70 }),
+        faker.number.int({ min: 10, max: 70 }),
+        faker.number.int({ min: 10, max: 70 }),
+        faker.number.int({ min: 10, max: 70 }),
+        faker.number.int({ min: 10, max: 70 }),
+        faker.number.int({ min: 10, max: 70 }),
+        faker.number.int({ min: 10, max: 70 }),
+      ],
+    },
   ],
 };
