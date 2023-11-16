@@ -11,10 +11,15 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineItem, { timelineItemClasses } from '@mui/lab/TimelineItem';
 
 import { fDateTime } from 'src/utils/format-time';
+import { Box, Button, Divider } from '@mui/material';
+import Iconify from 'src/components/iconify';
+import { useRouter } from 'src/routes/hooks';
 
 // ----------------------------------------------------------------------
 
 export default function AnalyticsOrderTimeline({ title, subheader, list, ...other }) {
+  const router = useRouter();
+
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
@@ -33,6 +38,21 @@ export default function AnalyticsOrderTimeline({ title, subheader, list, ...othe
           <OrderItem key={item.id} item={item} lastTimeline={index === list.length - 1} />
         ))}
       </Timeline>
+
+      <Divider sx={{ borderStyle: 'dashed' }} />
+
+      <Box sx={{ p: 2, textAlign: 'right' }}>
+        <Button
+          size="small"
+          color="inherit"
+          onClick={() => {
+            router.push('/:user/points-history');
+          }}
+          endIcon={<Iconify icon="eva:arrow-ios-forward-fill" />}
+        >
+          Ver todos
+        </Button>
+      </Box>
     </Card>
   );
 }

@@ -14,6 +14,7 @@ import AppConversionRates from '../components/app-conversion-rates';
 import { performance } from 'src/_mock/performance';
 import { averageDailyPoints } from 'src/_mock/averageDailyPoints';
 import { history } from 'src/_mock/history';
+import { tasks } from 'src/_mock/tasks';
 
 // ----------------------------------------------------------------------
 
@@ -62,7 +63,7 @@ export default function AppView() {
         </Grid>
         <Grid xs={12} md={6} lg={8}>
           <AppNewsUpdate
-            title="News Update"
+            title="Últimos desafios"
             list={[...Array(5)].map((_, index) => ({
               id: faker.string.uuid(),
               title: faker.person.jobTitle(),
@@ -74,14 +75,11 @@ export default function AppView() {
         </Grid>
         <Grid xs={12} md={6} lg={4}>
           <AppTasks
-            title="Tasks"
-            list={[
-              { id: '1', name: 'Create FireStone Logo' },
-              { id: '2', name: 'Add SCSS and JS files if required' },
-              { id: '3', name: 'Stakeholder Meeting' },
-              { id: '4', name: 'Scoping & Estimations' },
-              { id: '5', name: 'Sprint Showcase' },
-            ]}
+            title="Tarefas"
+            list={tasks.map((item) => ({
+              id: item.id,
+              name: item.name,
+            }))}
           />
         </Grid>
 
@@ -117,7 +115,7 @@ export default function AppView() {
         <Grid xs={12} md={6} lg={4}>
           <AppOrderTimeline
             title="Últimos pontos adquiridos"
-            list={history.history.slice(0, 5).map((item) => ({
+            list={history.history.slice(0, 4).map((item) => ({
               id: item.id,
               title: item.title,
               points: item.points,

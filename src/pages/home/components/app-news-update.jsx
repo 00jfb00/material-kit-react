@@ -13,10 +13,13 @@ import { fToNow } from 'src/utils/format-time';
 
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
+import { useRouter } from 'src/routes/hooks';
 
 // ----------------------------------------------------------------------
 
 export default function AppNewsUpdate({ title, subheader, list, ...other }) {
+  const router = useRouter();
+  
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
@@ -35,9 +38,12 @@ export default function AppNewsUpdate({ title, subheader, list, ...other }) {
         <Button
           size="small"
           color="inherit"
+          onClick={() => {
+            router.push('/:user/challenges');
+          }}
           endIcon={<Iconify icon="eva:arrow-ios-forward-fill" />}
         >
-          View all
+          Ver todos
         </Button>
       </Box>
     </Card>

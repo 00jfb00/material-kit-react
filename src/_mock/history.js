@@ -19,13 +19,6 @@ export const history = {
   history: [
     {
       id: faker.string.uuid(),
-      title: 'Commitador assíduo',
-      type: 'challenge',
-      points: 5,
-      createdAt: faker.date.past(),
-    },
-    {
-      id: faker.string.uuid(),
       title: 'Hard Skill',
       type: 'knowledge-hard',
       points: 1,
@@ -57,6 +50,13 @@ export const history = {
       title: 'De tijolo em tijolo',
       type: 'challenge',
       points: 1,
+      createdAt: faker.date.past(),
+    },
+    {
+      id: faker.string.uuid(),
+      title: 'Commitador assíduo',
+      type: 'challenge',
+      points: 5,
       createdAt: faker.date.past(),
     },
     {

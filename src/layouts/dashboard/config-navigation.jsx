@@ -23,6 +23,11 @@ const navConfig = [
     icon: icon('ic_cart'),
   },
   {
+    title: 'tarefas',
+    path: '/:user/tasks',
+    icon: icon('ic_cart'),
+  },
+  {
     title: 'hard-skills',
     path: '/:user/hard-skills',
     icon: icon('ic_blog'),

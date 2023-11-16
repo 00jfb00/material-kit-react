@@ -11,11 +11,14 @@ import CardHeader from '@mui/material/CardHeader';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
 import Iconify from 'src/components/iconify';
+import { Box, Button, Divider } from '@mui/material';
+import { useRouter } from 'src/routes/hooks';
 
 // ----------------------------------------------------------------------
 
 export default function AnalyticsTasks({ title, subheader, list, ...other }) {
   const [selected, setSelected] = useState(['2']);
+  const router = useRouter();
 
   const handleClickComplete = (taskId) => {
     const tasksCompleted = selected.includes(taskId)
@@ -37,6 +40,20 @@ export default function AnalyticsTasks({ title, subheader, list, ...other }) {
           onChange={() => handleClickComplete(task.id)}
         />
       ))}
+      <Divider sx={{ borderStyle: 'dashed' }} />
+
+      <Box sx={{ p: 2, textAlign: 'right' }}>
+        <Button
+          size="small"
+          color="inherit"
+          onClick={() => {
+            router.push('/:user/tasks');
+          }}
+          endIcon={<Iconify icon="eva:arrow-ios-forward-fill" />}
+        >
+          Ver todos
+        </Button>
+      </Box>
     </Card>
   );
 }

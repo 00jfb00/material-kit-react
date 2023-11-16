@@ -21,7 +21,6 @@ import Scrollbar from 'src/components/scrollbar';
 
 import { NAV } from './config-layout';
 import navConfig from './config-navigation';
-import { useParams } from 'react-router-dom';
 
 // ----------------------------------------------------------------------
 
@@ -140,19 +139,14 @@ Nav.propTypes = {
 
 function NavItem({ item }) {
   const pathname = usePathname();
-  const params = useParams();
   const router = useRouter();
 
-  const active = item.path === pathname;
+  const active = router.getRoutePathname(item.path) === pathname;
 
   return (
     <ListItemButton
       onClick={() => {
-        let url = item.path;
-        Object.keys(params).forEach((key) => {
-          url = url.replace(`:${key}`, params[key]);
-        });
-        router.push(url);
+        router.push(item.path);
       }}
       sx={{
         minHeight: 44,
