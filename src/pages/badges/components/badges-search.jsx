@@ -8,11 +8,13 @@ import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-PostSearch.propTypes = {
-  posts: PropTypes.array.isRequired,
+BadgesSearch.propTypes = {
+  badges: PropTypes.array.isRequired,
+  filterName: PropTypes.string,
+  onFilterName: PropTypes.func,
 };
 
-export default function PostSearch({ posts }) {
+export default function BadgesSearch({ badges, filterName, onFilterName }) {
   return (
     <Autocomplete
       sx={{ width: 280 }}
@@ -28,13 +30,16 @@ export default function PostSearch({ posts }) {
           },
         },
       }}
-      options={posts}
+      options={badges}
       getOptionLabel={(post) => post.title}
       isOptionEqualToValue={(option, value) => option.id === value.id}
+      onChange={(event) => onFilterName(event.target.innerText)}
       renderInput={(params) => (
         <TextField
           {...params}
-          placeholder="Search post..."
+          placeholder="Procurar badges..."
+          value={filterName}
+          onChange={(event) => onFilterName(event.target.value)}
           InputProps={{
             ...params.InputProps,
             startAdornment: (

@@ -8,7 +8,7 @@ export default function ProductsPage() {
   return (
     <>
       <Helmet>
-        <title> Products | Dev Dash </title>
+        <title> Hard Skills | Dev Dash </title>
       </Helmet>
 
       <HardSkillsView />

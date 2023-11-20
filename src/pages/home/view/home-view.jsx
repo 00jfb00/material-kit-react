@@ -26,15 +26,6 @@ export default function AppView() {
       <Grid container spacing={3}>
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="Seu Rank Atual"
-            total={performance.rank}
-            color="success"
-            icon={<img alt="icon" src="/assets/icons/glass/ic_glass_bag.png" />}
-          />
-        </Grid>
-
-        <Grid xs={12} sm={6} md={3}>
-          <AppWidgetSummary
             title="Seus pontos atuais"
             total={performance.points}
             color="info"
@@ -44,7 +35,7 @@ export default function AppView() {
 
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="Número de Badges"
+            title="Badges conquistados"
             total={performance.badges.length}
             color="warning"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_buy.png" />}
@@ -53,10 +44,18 @@ export default function AppView() {
 
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="Conhecimentos técnicos adquiridos"
-            total={performance.progress.hardSkills.details.done}
+            title="Conhecimentos técnicos"
+            total={performance.progress.hardSkills}
             color="error"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
+          />
+        </Grid>
+        <Grid xs={12} sm={6} md={3}>
+          <AppWidgetSummary
+            title="Capacidades comportamentais"
+            total={performance.progress.softSkills}
+            color="success"
+            icon={<img alt="icon" src="/assets/icons/glass/ic_glass_bag.png" />}
           />
         </Grid>
         <Grid xs={12} md={6} lg={8}>
@@ -75,7 +74,7 @@ export default function AppView() {
         <Grid xs={12} md={6} lg={4}>
           <AppTasks
             title="Tarefas"
-            list={tasks.map((item) => ({
+            list={tasks.slice(0, 7).map((item) => ({
               id: item.id,
               name: item.name,
             }))}
@@ -104,7 +103,7 @@ export default function AppView() {
             title="Progressão das ladders"
             subheader="% de conclusão"
             chart={{
-              series: Object.values(performance.progress).map((item) => ({
+              series: Object.values(performance.progress.details).map((item) => ({
                 label: item.label,
                 value: item.details.percentage,
               })),

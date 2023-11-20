@@ -1,17 +1,17 @@
 import { Helmet } from 'react-helmet-async';
 
-import { AppView } from './view';
+import { PointsHistoryView } from './view';
 
 // ----------------------------------------------------------------------
 
-export default function AppPage() {
+export default function PointsHistoryPage() {
   return (
     <>
       <Helmet>
-        <title> Dev Dash </title>
+        <title> Histórico de pontuaçõex | Dev Dash </title>
       </Helmet>
 
-      <AppView />
+      <PointsHistoryView />
     </>
   );
 }

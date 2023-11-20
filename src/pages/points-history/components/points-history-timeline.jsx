@@ -8,36 +8,27 @@ import CardHeader from '@mui/material/CardHeader';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineConnector from '@mui/lab/TimelineConnector';
-import TimelineItem, { timelineItemClasses } from '@mui/lab/TimelineItem';
+import TimelineItem from '@mui/lab/TimelineItem';
 
 import { fDateTime } from 'src/utils/format-time';
 
 // ----------------------------------------------------------------------
 
-export default function AnalyticsOrderTimeline({ title, subheader, list, ...other }) {
+export default function PointsHistoryTimeline({ title, subheader, list, ...other }) {
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
 
-      <Timeline
-        sx={{
-          m: 0,
-          p: 3,
-          [`& .${timelineItemClasses.root}:before`]: {
-            flex: 0,
-            padding: 0,
-          },
-        }}
-      >
+      <Timeline position="alternate">
         {list.map((item, index) => (
-          <OrderItem key={item.id} item={item} lastTimeline={index === list.length - 1} />
+          <PointsHistoryItem key={item.id} item={item} lastTimeline={index === list.length - 1} />
         ))}
       </Timeline>
     </Card>
   );
 }
 
-AnalyticsOrderTimeline.propTypes = {
+PointsHistoryTimeline.propTypes = {
   list: PropTypes.array,
   subheader: PropTypes.string,
   title: PropTypes.string,
@@ -45,7 +36,7 @@ AnalyticsOrderTimeline.propTypes = {
 
 // ----------------------------------------------------------------------
 
-function OrderItem({ item, lastTimeline }) {
+function PointsHistoryItem({ item, lastTimeline }) {
   const { type, title, time, points } = item;
   return (
     <TimelineItem>
@@ -77,7 +68,7 @@ function OrderItem({ item, lastTimeline }) {
   );
 }
 
-OrderItem.propTypes = {
+PointsHistoryItem.propTypes = {
   item: PropTypes.object,
   lastTimeline: PropTypes.bool,
 };

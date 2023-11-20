@@ -4,13 +4,13 @@ import { Outlet, Navigate, useRoutes } from 'react-router-dom';
 import DashboardLayout from 'src/layouts/dashboard';
 
 export const IndexPage = lazy(() => import('src/pages/home/home-page'));
-export const BadgesPage = lazy(() => import('src/pages/badges/blog-page'));
+export const BadgesPage = lazy(() => import('src/pages/badges/badges-page'));
 export const RankingPage = lazy(() => import('src/pages/ranking/blog-page'));
-export const TasksPage = lazy(() => import('src/pages/tasks/blog-page'));
-export const PointsHistoryPage = lazy(() => import('src/pages/points-history/home-page'));
+export const TasksPage = lazy(() => import('src/pages/tasks/tasks-page'));
+export const PointsHistoryPage = lazy(() => import('src/pages/points-history/points-history-page'));
 export const ProductsPage = lazy(() => import('src/pages/products/blog-page'));
 export const InfosPage = lazy(() => import('src/pages/infos/blog-page'));
-export const ChallengesPage = lazy(() => import('src/pages/challenges/blog-page'));
+export const ChallengesPage = lazy(() => import('src/pages/challenges/challenges-page'));
 export const HardSkillsPage = lazy(() => import('src/pages/hard-skills/hard-skills-page'));
 export const HardSkillsLadderPage = lazy(() =>
   import('src/pages/hard-skills/hard-skills-ladder-page')

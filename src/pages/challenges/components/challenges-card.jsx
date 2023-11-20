@@ -14,56 +14,72 @@ import { fShortenNumber } from 'src/utils/format-number';
 
 import Iconify from 'src/components/iconify';
 import SvgColor from 'src/components/svg-color';
+import { BorderLinearProgress } from 'src/components/progress';
+import { Tooltip } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
-export default function PostCard({ post, index }) {
-  const { cover, title, view, comment, share, author, createdAt } = post;
-
-  const latestPostLarge = index === 0;
-
-  const latestPost = index === 1 || index === 2;
+export default function ChallengeCard({ challenge }) {
+  const { cover, title, description, points, done, progress, conqueredAt } = challenge;
 
   const renderAvatar = (
     <Avatar
-      alt={author.name}
-      src={author.avatarUrl}
       sx={{
-        zIndex: 9,
-        width: 32,
-        height: 32,
         position: 'absolute',
-        left: (theme) => theme.spacing(3),
         bottom: (theme) => theme.spacing(-2),
-        ...((latestPostLarge || latestPost) && {
-          zIndex: 9,
-          top: 24,
-          left: 24,
-          width: 40,
-          height: 40,
-        }),
+        backgroundColor: 'success.main',
+        zIndex: 9,
+        top: 24,
+        left: 24,
+        width: 40,
+        height: 40,
       }}
-    />
+    >
+      <Iconify width={40} icon="lets-icons:done-duotone" />
+    </Avatar>
   );
 
   const renderTitle = (
     <Link
       color="inherit"
       variant="subtitle2"
-      underline="hover"
+      underline="none"
       sx={{
-        height: 44,
         overflow: 'hidden',
         WebkitLineClamp: 2,
         display: '-webkit-box',
         WebkitBoxOrient: 'vertical',
-        ...(latestPostLarge && { typography: 'h5', height: 60 }),
-        ...((latestPostLarge || latestPost) && {
-          color: 'common.white',
-        }),
+        typography: 'h5',
+        height: 60,
+        color: 'common.white',
       }}
     >
       {title}
+    </Link>
+  );
+
+  const renderProgress = (
+    <Tooltip title={`${progress}% concluído`} arrow>
+      <BorderLinearProgress variant="determinate" value={progress} />
+    </Tooltip>
+  );
+
+  const renderDescription = (
+    <Link
+      color="inherit"
+      variant="caption"
+      underline="none"
+      sx={{
+        overflow: 'hidden',
+        WebkitLineClamp: 2,
+        display: '-webkit-box',
+        WebkitBoxOrient: 'vertical',
+        typography: 'caption',
+        height: 60,
+        color: 'common.white',
+      }}
+    >
+      {description}
     </Link>
   );
 
@@ -78,23 +94,17 @@ export default function PostCard({ post, index }) {
         color: 'text.disabled',
       }}
     >
-      {[
-        { number: comment, icon: 'eva:message-circle-fill' },
-        { number: view, icon: 'eva:eye-fill' },
-        { number: share, icon: 'eva:share-fill' },
-      ].map((info, _index) => (
+      {[{ number: points, icon: 'mdi:star-four-points-circle' }].map((info, _index) => (
         <Stack
           key={_index}
           direction="row"
           sx={{
-            ...((latestPostLarge || latestPost) && {
-              opacity: 0.48,
-              color: 'common.white',
-            }),
+            opacity: 0.48,
+            color: 'common.white',
           }}
         >
           <Iconify width={16} icon={info.icon} sx={{ mr: 0.5 }} />
-          <Typography variant="caption">{fShortenNumber(info.number)}</Typography>
+          <Typography variant="caption">Vale {fShortenNumber(info.number)} pontos</Typography>
         </Stack>
       ))}
     </Stack>
@@ -121,14 +131,11 @@ export default function PostCard({ post, index }) {
       component="div"
       sx={{
         mb: 2,
-        color: 'text.disabled',
-        ...((latestPostLarge || latestPost) && {
-          opacity: 0.48,
-          color: 'common.white',
-        }),
+        opacity: 0.48,
+        color: 'common.white',
       }}
     >
-      {fDate(createdAt)}
+      {fDate(conqueredAt)}
     </Typography>
   );
 
@@ -143,40 +150,34 @@ export default function PostCard({ post, index }) {
         bottom: -15,
         position: 'absolute',
         color: 'background.paper',
-        ...((latestPostLarge || latestPost) && { display: 'none' }),
+        display: 'none',
       }}
     />
   );
 
   return (
-    <Grid xs={12} sm={latestPostLarge ? 12 : 6} md={latestPostLarge ? 6 : 3}>
+    <Grid xs={12} sm={12} md={6}>
       <Card>
         <Box
           sx={{
             position: 'relative',
-            pt: 'calc(100% * 3 / 4)',
-            ...((latestPostLarge || latestPost) && {
-              pt: 'calc(100% * 4 / 3)',
-              '&:after': {
-                top: 0,
-                content: "''",
-                width: '100%',
-                height: '100%',
-                position: 'absolute',
-                bgcolor: (theme) => alpha(theme.palette.grey[900], 0.72),
-              },
-            }),
-            ...(latestPostLarge && {
-              pt: {
-                xs: 'calc(100% * 4 / 3)',
-                sm: 'calc(100% * 3 / 4.66)',
-              },
-            }),
+            '&:after': {
+              top: 0,
+              content: "''",
+              width: '100%',
+              height: '100%',
+              position: 'absolute',
+              bgcolor: (theme) => alpha(theme.palette.grey[900], 0.72),
+            },
+            pt: {
+              xs: 'calc(100% * 4 / 3)',
+              sm: 'calc(100% * 3 / 4.66)',
+            },
           }}
         >
           {renderShape}
 
-          {renderAvatar}
+          {done ? renderAvatar : null}
 
           {renderCover}
         </Box>
@@ -184,16 +185,18 @@ export default function PostCard({ post, index }) {
         <Box
           sx={{
             p: (theme) => theme.spacing(4, 3, 3, 3),
-            ...((latestPostLarge || latestPost) && {
-              width: 1,
-              bottom: 0,
-              position: 'absolute',
-            }),
+            width: 1,
+            bottom: 0,
+            position: 'absolute',
           }}
         >
-          {renderDate}
+          {done ? renderDate : null}
 
           {renderTitle}
+
+          {renderDescription}
+
+          {renderProgress}
 
           {renderInfo}
         </Box>
@@ -202,7 +205,6 @@ export default function PostCard({ post, index }) {
   );
 }
 
-PostCard.propTypes = {
-  post: PropTypes.object.isRequired,
-  index: PropTypes.number,
+ChallengeCard.propTypes = {
+  challenge: PropTypes.object.isRequired,
 };

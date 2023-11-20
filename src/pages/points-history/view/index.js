@@ -1,1 +1,1 @@
-export { default as AppView } from './home-view';
+export { default as PointsHistoryView } from './points-history-view';

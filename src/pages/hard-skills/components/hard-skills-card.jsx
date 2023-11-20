@@ -6,18 +6,20 @@ import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
-import { fCurrency } from 'src/utils/format-number';
-
 import Label from 'src/components/label';
-import { ColorPreview } from 'src/components/color-utils';
+import { BorderLinearProgress } from 'src/components/progress';
+import { Tooltip } from '@mui/material';
+import { useRouter } from 'src/routes/hooks';
 
 // ----------------------------------------------------------------------
 
-export default function ShopProductCard({ product }) {
+export default function HardSkillsCard({ ladder }) {
+  const router = useRouter();
+
   const renderStatus = (
     <Label
       variant="filled"
-      color={(product.status === 'sale' && 'error') || 'info'}
+      color={(ladder.status === 'Concluída' && 'success') || 'info'}
       sx={{
         zIndex: 9,
         top: 16,
@@ -25,16 +27,17 @@ export default function ShopProductCard({ product }) {
         position: 'absolute',
         textTransform: 'uppercase',
       }}
+      style={{ cursor: 'pointer' }}
     >
-      {product.status}
+      {ladder.status}
     </Label>
   );
 
   const renderImg = (
     <Box
       component="img"
-      alt={product.name}
-      src={product.cover}
+      alt={ladder.name}
+      src={ladder.cover}
       sx={{
         top: 0,
         width: 1,
@@ -45,45 +48,46 @@ export default function ShopProductCard({ product }) {
     />
   );
 
-  const renderPrice = (
-    <Typography variant="subtitle1">
-      <Typography
-        component="span"
-        variant="body1"
-        sx={{
-          color: 'text.disabled',
-          textDecoration: 'line-through',
-        }}
-      >
-        {product.priceSale && fCurrency(product.priceSale)}
-      </Typography>
-      &nbsp;
-      {fCurrency(product.price)}
+  const renderInfo = (
+    <Typography
+      component="span"
+      variant="caption"
+      sx={{
+        color: 'text.disabled',
+      }}
+    >
+      {ladder.acquiredKnowledges}/{ladder.totalKnowledges} aprendizados
     </Typography>
   );
 
   return (
-    <Card>
+    <Card
+      style={{ cursor: 'pointer' }}
+      onClick={() => router.push(`/:user/hard-skills/${ladder.id}`, { state: { ladder } })}
+    >
       <Box sx={{ pt: '100%', position: 'relative' }}>
-        {product.status && renderStatus}
+        {ladder.status && renderStatus}
 
         {renderImg}
       </Box>
 
       <Stack spacing={2} sx={{ p: 3 }}>
-        <Link color="inherit" underline="hover" variant="subtitle2" noWrap>
-          {product.name}
+        <Link color="inherit" underline="none" variant="subtitle2" noWrap>
+          {ladder.name}
         </Link>
 
+        <Tooltip title={`${Math.floor(ladder.progress)}% concluído`} arrow>
+          <BorderLinearProgress variant="determinate" value={ladder.progress} />
+        </Tooltip>
+
         <Stack direction="row" alignItems="center" justifyContent="space-between">
-          <ColorPreview colors={product.colors} />
-          {renderPrice}
+          {renderInfo}
         </Stack>
       </Stack>
     </Card>
   );
 }
 
-ShopProductCard.propTypes = {
-  product: PropTypes.object,
+HardSkillsCard.propTypes = {
+  ladder: PropTypes.object,
 };

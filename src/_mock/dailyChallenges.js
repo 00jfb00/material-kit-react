@@ -9,7 +9,7 @@ export const dailyChallenges = [
     type: 'Diário',
     description: 'Conclua 1 item de conhecimento',
     points: 1,
-    icon: '/assets/images/badges/badge_1.svg',
+    cover: `/assets/images/covers/cover_${faker.number.int({ min: 2, max: 5 })}.jpg`,
   },
   {
     id: faker.string.uuid(),
@@ -17,7 +17,7 @@ export const dailyChallenges = [
     type: 'Diário',
     description: 'Conclua 10 itens de conhecimento',
     points: 12,
-    icon: '/assets/images/badges/badge_1.svg',
+    cover: `/assets/images/covers/cover_${faker.number.int({ min: 2, max: 5 })}.jpg`,
   },
   {
     id: faker.string.uuid(),
@@ -25,7 +25,7 @@ export const dailyChallenges = [
     type: 'Diário',
     description: 'Conclua 1 trilha de conhecimento',
     points: 15,
-    icon: '/assets/images/badges/badge_1.svg',
+    cover: `/assets/images/covers/cover_${faker.number.int({ min: 2, max: 5 })}.jpg`,
   },
   {
     id: faker.string.uuid(),
@@ -33,7 +33,7 @@ export const dailyChallenges = [
     type: 'Diário',
     description: 'Faça 1 commit hoje',
     points: 5,
-    icon: '/assets/images/badges/badge_1.svg',
+    cover: `/assets/images/covers/cover_${faker.number.int({ min: 2, max: 5 })}.jpg`,
   },
   {
     id: faker.string.uuid(),
@@ -41,7 +41,7 @@ export const dailyChallenges = [
     type: 'Diário',
     description: 'Faça 5 commits hoje',
     points: 10,
-    icon: '/assets/images/badges/badge_1.svg',
+    cover: `/assets/images/covers/cover_${faker.number.int({ min: 2, max: 5 })}.jpg`,
   },
   {
     id: faker.string.uuid(),
@@ -49,7 +49,7 @@ export const dailyChallenges = [
     type: 'Diário',
     description: 'Faça 10 commits hoje',
     points: 15,
-    icon: '/assets/images/badges/badge_1.svg',
+    cover: `/assets/images/covers/cover_${faker.number.int({ min: 2, max: 5 })}.jpg`,
   },
   {
     id: faker.string.uuid(),
@@ -57,7 +57,7 @@ export const dailyChallenges = [
     type: 'Diário',
     description: 'Conclua 1 história de usuário ou enabler',
     points: 10,
-    icon: '/assets/images/badges/badge_2.svg',
+    cover: `/assets/images/covers/cover_${faker.number.int({ min: 2, max: 5 })}.jpg`,
   },
   {
     id: faker.string.uuid(),
@@ -65,7 +65,7 @@ export const dailyChallenges = [
     type: 'Diário',
     description: 'Conclua 3 história de usuário ou enabler',
     points: 40,
-    icon: '/assets/images/badges/badge_2.svg',
+    cover: `/assets/images/covers/cover_${faker.number.int({ min: 2, max: 5 })}.jpg`,
   },
   {
     id: faker.string.uuid(),
@@ -73,7 +73,7 @@ export const dailyChallenges = [
     type: 'Diário',
     description: 'Conclua 1 débito técnico',
     points: 10,
-    icon: '/assets/images/badges/badge_2.svg',
+    cover: `/assets/images/covers/cover_${faker.number.int({ min: 2, max: 5 })}.jpg`,
   },
   {
     id: faker.string.uuid(),
@@ -81,7 +81,7 @@ export const dailyChallenges = [
     type: 'Diário',
     description: 'Conclua 3 débitos técnicos',
     points: 40,
-    icon: '/assets/images/badges/badge_2.svg',
+    cover: `/assets/images/covers/cover_${faker.number.int({ min: 2, max: 5 })}.jpg`,
   },
   {
     id: faker.string.uuid(),
@@ -89,6 +89,6 @@ export const dailyChallenges = [
     type: 'Diário',
     description: 'Conclua todos os desafios diários do dia',
     points: 20,
-    icon: '/assets/images/badges/badge_2.svg',
+    cover: `/assets/images/covers/cover_${faker.number.int({ min: 2, max: 5 })}.jpg`,
   },
 ];

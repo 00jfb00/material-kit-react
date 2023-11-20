@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { applyNodeChanges, applyEdgeChanges } from 'reactflow';
-import { hardSkills } from '../../../_mock/hard-skills';
+import { hardSkills } from '../../../_mock/hard-skills-backend';
 
 const useStore = create((set, get) => ({
   ...hardSkills,

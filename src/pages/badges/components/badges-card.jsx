@@ -14,20 +14,18 @@ import { fShortenNumber } from 'src/utils/format-number';
 
 import Iconify from 'src/components/iconify';
 import SvgColor from 'src/components/svg-color';
+import { Tooltip } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
-export default function PostCard({ post, index }) {
-  const { cover, title, view, comment, share, author, createdAt } = post;
+export default function PostCard({ badge, index }) {
+  const { cover, title, points, description, conqueredAt, acquired } = badge;
 
-  const latestPostLarge = index === 0;
-
-  const latestPost = index === 1 || index === 2;
 
   const renderAvatar = (
     <Avatar
-      alt={author.name}
-      src={author.avatarUrl}
+      alt="Badge Conquistado"
+      src="https://www.creativefabrica.com/wp-content/uploads/2023/02/06/Gold-Metal-Trophy-vector-illustration-Graphics-60191104-1.jpg"
       sx={{
         zIndex: 9,
         width: 32,
@@ -35,7 +33,7 @@ export default function PostCard({ post, index }) {
         position: 'absolute',
         left: (theme) => theme.spacing(3),
         bottom: (theme) => theme.spacing(-2),
-        ...((latestPostLarge || latestPost) && {
+        ...(!acquired && {
           zIndex: 9,
           top: 24,
           left: 24,
@@ -57,8 +55,7 @@ export default function PostCard({ post, index }) {
         WebkitLineClamp: 2,
         display: '-webkit-box',
         WebkitBoxOrient: 'vertical',
-        ...(latestPostLarge && { typography: 'h5', height: 60 }),
-        ...((latestPostLarge || latestPost) && {
+        ...(!acquired && {
           color: 'common.white',
         }),
       }}
@@ -78,23 +75,20 @@ export default function PostCard({ post, index }) {
         color: 'text.disabled',
       }}
     >
-      {[
-        { number: comment, icon: 'eva:message-circle-fill' },
-        { number: view, icon: 'eva:eye-fill' },
-        { number: share, icon: 'eva:share-fill' },
-      ].map((info, _index) => (
+      {[{ number: points, icon: 'mdi:star-four-points-circle' }].map((info, _index) => (
         <Stack
           key={_index}
           direction="row"
           sx={{
-            ...((latestPostLarge || latestPost) && {
+            color: 'text.primary',
+            ...(!acquired && {
               opacity: 0.48,
               color: 'common.white',
             }),
           }}
         >
           <Iconify width={16} icon={info.icon} sx={{ mr: 0.5 }} />
-          <Typography variant="caption">{fShortenNumber(info.number)}</Typography>
+          <Typography variant="caption">Vale {fShortenNumber(info.number)} pontos</Typography>
         </Stack>
       ))}
     </Stack>
@@ -122,13 +116,13 @@ export default function PostCard({ post, index }) {
       sx={{
         mb: 2,
         color: 'text.disabled',
-        ...((latestPostLarge || latestPost) && {
+        ...(!acquired && {
           opacity: 0.48,
           color: 'common.white',
         }),
       }}
     >
-      {fDate(createdAt)}
+      {fDate(conqueredAt)}
     </Typography>
   );
 
@@ -143,66 +137,62 @@ export default function PostCard({ post, index }) {
         bottom: -15,
         position: 'absolute',
         color: 'background.paper',
-        ...((latestPostLarge || latestPost) && { display: 'none' }),
+        ...(!acquired && { display: 'none' }),
       }}
     />
   );
 
   return (
-    <Grid xs={12} sm={latestPostLarge ? 12 : 6} md={latestPostLarge ? 6 : 3}>
-      <Card>
-        <Box
-          sx={{
-            position: 'relative',
-            pt: 'calc(100% * 3 / 4)',
-            ...((latestPostLarge || latestPost) && {
-              pt: 'calc(100% * 4 / 3)',
-              '&:after': {
-                top: 0,
-                content: "''",
-                width: '100%',
-                height: '100%',
+    <Grid xs={12} sm={6} md={3}>
+      <Tooltip title={description} arrow>
+        <Card style={{ maxHeight: 300 }}>
+          <Box
+            sx={{
+              position: 'relative',
+              pt: 'calc(100% * 2 / 4)',
+              ...(!acquired && {
+                pt: 'calc(100% * 4 / 3)',
+                '&:after': {
+                  top: 0,
+                  content: "''",
+                  width: '100%',
+                  height: '100%',
+                  position: 'absolute',
+                  bgcolor: (theme) => alpha(theme.palette.grey[900], 0.72),
+                },
+              }),
+            }}
+          >
+            {renderShape}
+
+            {acquired ? renderAvatar : null}
+
+            {renderCover}
+          </Box>
+
+          <Box
+            sx={{
+              p: (theme) => theme.spacing(4, 3, 3, 3),
+              ...(!acquired && {
+                width: 1,
+                bottom: 0,
                 position: 'absolute',
-                bgcolor: (theme) => alpha(theme.palette.grey[900], 0.72),
-              },
-            }),
-            ...(latestPostLarge && {
-              pt: {
-                xs: 'calc(100% * 4 / 3)',
-                sm: 'calc(100% * 3 / 4.66)',
-              },
-            }),
-          }}
-        >
-          {renderShape}
+              }),
+            }}
+          >
+            {acquired ? renderDate : null}
 
-          {renderAvatar}
+            {renderTitle}
 
-          {renderCover}
-        </Box>
-
-        <Box
-          sx={{
-            p: (theme) => theme.spacing(4, 3, 3, 3),
-            ...((latestPostLarge || latestPost) && {
-              width: 1,
-              bottom: 0,
-              position: 'absolute',
-            }),
-          }}
-        >
-          {renderDate}
-
-          {renderTitle}
-
-          {renderInfo}
-        </Box>
-      </Card>
+            {renderInfo}
+          </Box>
+        </Card>
+      </Tooltip>
     </Grid>
   );
 }
 
 PostCard.propTypes = {
-  post: PropTypes.object.isRequired,
+  badge: PropTypes.object.isRequired,
   index: PropTypes.number,
 };
