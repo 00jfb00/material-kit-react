@@ -38,6 +38,11 @@ const navConfig = [
     icon: icon('ic_blog'),
   },
   {
+    title: 'moving motivators',
+    path: '/:user/moving-motivators',
+    icon: icon('ic_blog'),
+  },
+  {
     title: 'ranking',
     path: '/:user/ranking',
     icon: icon('ic_cart'),

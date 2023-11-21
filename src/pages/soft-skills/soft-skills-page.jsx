@@ -1,17 +1,17 @@
 import { Helmet } from 'react-helmet-async';
 
-import { HardSkillsView } from './view';
+import { SoftSkillsView } from './view';
 
 // ----------------------------------------------------------------------
 
-export default function ProductsPage() {
+export default function SoftSkillsPage() {
   return (
     <>
       <Helmet>
-        <title> Products | Dev Dash </title>
+        <title> Soft Skills | Dev Dash </title>
       </Helmet>
 
-      <HardSkillsView />
+      <SoftSkillsView />
     </>
   );
 }
