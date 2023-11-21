@@ -11,7 +11,7 @@ import {
 } from '@dnd-kit/core';
 import { SortableContext, arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import { SortableItem } from '../components/sortable-item';
-import { Container, Grid, Stack, Typography } from '@mui/material';
+import { Box, Container, Grid, Stack, Typography } from '@mui/material';
 
 const getItems = () => {
   const availableMovingMotivators = [
@@ -102,38 +102,40 @@ export default function MovingMotivatorsView() {
   };
 
   return (
-    <Container>
-      <Stack direction="column" alignItems="start" justifyContent="space-between" mb={5}>
+    <Container style={{ padding: 0}}>
+      <Stack direction="column" alignItems="start" justifyContent="space-between" mb={2}>
         <Typography variant="h4">Moving Motivators</Typography>
         <br />
-        <Typography variant="caption">
+        <Typography variant="caption" sx={{ color: 'text.secondary' }}>
           Ordene os cards abaixo considereando oque mais é importante para você durante sua jornada
           profissional conosco. Quão mais ao topo e ao lado esquerdo, mais prioritário:
         </Typography>
       </Stack>
-      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-        <SortableContext items={items}>
-          <Grid
-            style={{ alignItems: 'center' }}
-            container
-            spacing={{ xs: 2, md: 3 }}
-            columns={{ xs: 4, sm: 8, md: 12 }}
-          >
-            {items.map((item) => (
-              <Grid
-                style={{ padding: 10, alignItems: 'center', justifyContent: 'center' }}
-                item
-                xs={2}
-                sm={4}
-                md={4}
-                key={item.id}
-              >
-                <SortableItem item={item} />
-              </Grid>
-            ))}
-          </Grid>
-        </SortableContext>
-      </DndContext>
+      <Box>
+        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+          <SortableContext items={items}>
+            <Grid
+              style={{ alignItems: 'center', margin: 0 }}
+              container
+              spacing={{ xs: 2, md: 3 }}
+              columns={{ xs: 4, sm: 8, md: 12 }}
+            >
+              {items.map((item) => (
+                <Grid
+                  style={{ padding: 10, alignItems: 'center', justifyContent: 'center' }}
+                  item
+                  xs={2}
+                  sm={4}
+                  md={4}
+                  key={item.id}
+                >
+                  <SortableItem item={item} />
+                </Grid>
+              ))}
+            </Grid>
+          </SortableContext>
+        </DndContext>
+      </Box>
     </Container>
   );
 }

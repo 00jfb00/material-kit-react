@@ -41,6 +41,7 @@ export default function Router() {
         { path: '/:user', element: <IndexPage /> },
         { path: '/:user/users', element: <UsersPage /> },
         { path: '/:user/products', element: <ProductsPage /> },
+        { path: '/:user/infos', element: <InfosPage /> },
         { path: '/:user/badges', element: <BadgesPage /> },
         { path: '/:user/tasks', element: <TasksPage /> },
         { path: '/:user/tasks', element: <TasksPage /> },

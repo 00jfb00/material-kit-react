@@ -42,11 +42,11 @@ const navConfig = [
     path: '/:user/moving-motivators',
     icon: icon('ic_blog'),
   },
-  {
-    title: 'ranking',
-    path: '/:user/ranking',
-    icon: icon('ic_cart'),
-  },
+  // {
+  //   title: 'ranking',
+  //   path: '/:user/ranking',
+  //   icon: icon('ic_cart'),
+  // },
   {
     title: 'histórico de pontuação',
     path: '/:user/points-history',

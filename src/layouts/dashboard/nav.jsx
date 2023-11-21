@@ -92,6 +92,14 @@ export default function Nav({ openNav, onCloseNav }) {
       {renderMenu}
 
       <Box sx={{ flexGrow: 1 }} />
+
+      <Typography
+        variant="caption"
+        style={{ marginTop: 15 }}
+        sx={{ px: 2, pb: 2, color: 'text.secondary' }}
+      >
+        @Dev Dash - 2023
+      </Typography>
     </Scrollbar>
   );
 
